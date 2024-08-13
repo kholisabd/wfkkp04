@@ -26,87 +26,68 @@
       margin: 0;
       overflow-x: hidden;
     }
-  </style>
-
-    <style>
-        
     ul {
-    list-style: none;
-    margin-left: -2rem;
-}
-
+        list-style: none;
+        margin-left: -2rem;
+    }
     ul a{
         text-decoration: none;
     }
-    
-
-        .low-calorie {
-            
-          font-size: 0.6rem;
-            color: white;
-            background-color:rgb(29, 93, 255) ;
-            border-radius: 50%;
-            cursor: pointer;
-            top: -2rem;
-            left: 2rem;
-            position: relative;
-
-        }
-
-        .good-calorie {
-            font-size: 0.6rem;
-            color: white;
-            background-color:rgb(29, 115, 1) ;
-            border-radius: 50%;
-            cursor: pointer;
-            top: -2rem;
-            left: 2rem;
-            position: relative;
-        }
-
-        .over-calorie {
-            font-size: 0.6rem;
-            color: white;
-            background-color:rgb(115, 1, 1) ;
-            border-radius: 50%;
-            cursor: pointer;
-            top: -2rem;
-            left: 2rem;
-            position: relative;
-        }
-
-        .breakfast{
-
-            font-size:  0.8rem;
-            font-weight: 600;
-            color: #075700;
-            cursor: pointer;
-            margin-top: -5rem;
-        }
-
-        .lunch{
-
-            font-size:  0.8rem;
-            font-weight: 600;
-            color: #777503;
-            cursor: pointer;
-            margin-top: -5rem;
-
-        }
-
-        .dinner{
-
-            font-size:  0.8rem;
-            font-weight: 600;
-            color: #0c065c;
-            cursor: pointer;
-            margin-top: -5rem;
-
-        }
-
-
-    </style>
-
+    .low-calorie {
+        font-size: 0.6rem;
+        color: white;
+        background-color: rgb(29, 93, 255);
+        border-radius: 50%;
+        cursor: pointer;
+        top: -2rem;
+        left: 2rem;
+        position: relative;
+    }
+    .good-calorie {
+        font-size: 0.6rem;
+        color: white;
+        background-color: rgb(29, 115, 1);
+        border-radius: 50%;
+        cursor: pointer;
+        top: -2rem;
+        left: 2rem;
+        position: relative;
+    }
+    .over-calorie {
+        font-size: 0.6rem;
+        color: white;
+        background-color: rgb(115, 1, 1);
+        border-radius: 50%;
+        cursor: pointer;
+        top: -2rem;
+        left: 2rem;
+        position: relative;
+    }
+    .breakfast {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #075700;
+        cursor: pointer;
+        margin-top: -5rem;
+    }
+    .lunch {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #777503;
+        cursor: pointer;
+        margin-top: -5rem;
+    }
+    .dinner {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #0c065c;
+        cursor: pointer;
+        margin-top: -5rem;
+    }
+    #calendar {
+        display: none; /* Hide calendar initially */
+    }
+  </style>
 </head>
 <body>
     <nav>
@@ -114,10 +95,8 @@
             <div class="logo-image">
                 <img src="img/logo.jpg" alt="">
             </div>
-
             <span class="logo_name">Foodnutri</span>
         </div>
-
         <div class="menu-items">
             <ul class="nav-links">
                 <li><a href="main.html">
@@ -132,214 +111,147 @@
                     <i class="uil uil-utensils-alt"></i>
                     <span class="link-name">Similar Food Recommendation</span>
                 </a></li>
-
                 <li><a href="recomfooduser.html">
                   <i class="uil uil-chat-bubble-user"></i>
                   <span class="link-name">User Based Recommendation</span>
               </a></li>
-
-            </ul>
-            
-            <ul class="logout-mode">
-
-                <div class="mode-toggle">
-                </div>
-            </li>
             </ul>
         </div>
-
-
-
-
     </nav>
 
     <section class="dashboard">
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
-
-            <div class="search-box">
-                <!-- <i class="uil uil-search"></i>
-                <input type="text" placeholder="Search here..."> -->
-            </div>
-            
-            
+            <div class="search-box"></div>
             <div class="dropdown">
-              <a href="#" class="dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-              <img src="img/profile.jpg" alt=""></a>
-              <!-- <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown button
-              </button> -->
+              <a href="#" class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="img/profile.jpg" alt=""></a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="updateprof1.html">  <i class="uil uil-user"></i> Update Profile</a></li>
-                <li><a class="dropdown-item" href="login.html">  <i class="uil uil-sign-out-alt"></i> Logout</a></li>
-               
+                <li><a class="dropdown-item" href="updateprof1.html"><i class="uil uil-user"></i> Update Profile</a></li>
+                <li><a class="dropdown-item" href="login.html"><i class="uil uil-sign-out-alt"></i> Logout</a></li>
               </ul>
             </div>
-
-
-
-
-
         </div>
 
-      
-<div id="calendar" style="padding: 1rem;"></div>
+        <!-- Form to choose date -->
+        <form class="m-5" id="date-form" action="" method="post">
+            <div class="me-3 mt-4">
+                <label for="date1" class="form-label">Choose Date</label>
+                <input type="date" class="form-control" id="date1" name="date1" required />
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 3.55rem; height: 2.2rem;">Submit</button>
+        </form>
 
+        <!-- Calendar container -->
+        <div id="calendar" style="padding: 1rem;"></div>
 
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Food Detail</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="img/img1.jpg" class="m-3" alt="profile" style="width: 430px; height: 300px; border-radius: 10%;">
-        <h3>Lorem, ipsum.</h3><hr>  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi dolore, temporibus nisi dignissimos dolorem perferendis iste reprehenderit voluptatum repudiandae est aspernatur soluta delectus officia, molestias et fuga hic, minima eveniet nesciunt assumenda? Totam, libero? Soluta recusandae at ipsum iste odio dolorem a dolores, natus, nemo culpa iure libero aut obcaecati quo numquam. Officiis, provident dignissimos placeat magni culpa quaerat repellat vero veritatis velit quidem tempora ratione, <hr> at ea eaque quae facilis inventore molestiae, consectetur fuga a sequi. Consequatur, mollitia ipsam ut corporis dolorum rerum repudiandae veniam molestias. Asperiores, vero voluptatibus! Debitis magni quibusdam minus fugit ducimus, a eaque pariatur fuga?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Button</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-</body>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="dist/calendar-gc.min.js"></script>
-<script>
-
-  $(function (e) {
-
-    var calendar = $("#calendar").calendarGC({
-      dayBegin: 0,
-      prevIcon: '&#x3c;',
-      nextIcon: '&#x3e;',
-      onPrevMonth: function (e) {
-        console.log("prev");
-        console.log(e);
-      },
-      onNextMonth: function (e) {
-        console.log("next");
-        console.log(e);
-      },
-      events: getHoliday(),
-      onclickDate: function (e, data) {
-        console.log(e, data);
-      }
-      
-    });
-
-  });
-
-
-  $(function (e) {
-            var calendar = $("#calendar").calendarGC({
-                events: [
-                    {
-                        date: new Date("2024-08-08"),
-                        eventName: "<span class='low-calorie'> &nbsp; . &nbsp;</span>",
-                        className: "my-class",
-                        dateColor: "#37385c"
-                        
-                    },
-                    {
-                        date: new Date("2024-08-09"),
-                        eventName: "<span class='good-calorie'> &nbsp; . &nbsp;</span>",
-                        className: "my-class",
-                        dateColor: "#37385c"
-                    },
-
-                    {
-                        date: new Date("2024-08-09"),
-                        eventName: "<span  class='link-success'  style='cursor: pointer;' data-bs-toggle='modal' data-bs-target='#exampleModal'>Breakfast</span>",
-                        className: "my-class",
-                        dateColor: "#37385c"
-                    },
-
-                    {
-                    date: new Date("2024-08-09"),
-                    eventName: "<span  class='link-warning' style='cursor: pointer;' data-bs-toggle='modal' data-bs-target='#exampleModal'>Lunch</span>",
-                    className: "my-class",
-                    dateColor: "#37385c"
-                    },
-
-                    {
-                        date: new Date("2024-08-09"),
-                        eventName: "<span  class='link-primary'  style='cursor: pointer;' data-bs-toggle='modal' data-bs-target='#exampleModal'>Dinner</span>",
-                        className: "my-class",
-                        dateColor: "#37385c"
-                    },
-
-                    {
-                        date: new Date("2024-08-07"),
-                        eventName: "<span class='over-calorie'> &nbsp; . &nbsp;</span>",
-                        className: "my-class",
-                        dateColor: "#37385c"
-                    },
-                   
-                ],
-                onclickDate: function(e, data) {
-                    console.log(e, data);
-                }
-            });
-        });
-
-
-
-  // function getHoliday() {
-  //   var d = new Date();
-  //   var totalDay = new Date(d.getFullYear(), d.getMonth(), 0).getDate();
-  //   var events = [];
-
-  //   for (var i = 1; i <= totalDay; i++) {
-  //     var newDate = new Date(d.getFullYear(), d.getMonth(), i);
-  //     if (newDate.getDay() == 0) {   //if Sunday
-  //       events.push({
-  //         date: newDate,
-  //         eventName: "Sunday free",
-  //         className: "badge bg-danger",
-  //         onclick(e, data) {
-  //           console.log(data);
-  //         },
-  //         dateColor: "red"
-  //       });
-  //     }
-  //     if (newDate.getDay() == 6) {   //if Saturday
-  //       events.push({
-  //         date: newDate,
-  //         eventName: "Saturday free",
-  //         className: "badge bg-danger",
-  //         onclick(e, data) {
-  //           console.log(data);
-  //         },
-  //         dateColor: "red"
-  //       });
-  //     }
-
-  //   }
-  //   return events;
-  // }
-
-  getHoliday()
-
-</script>
-
-
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Food Detail</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <img src="img/img1.jpg" class="m-3" alt="profile" style="width: 430px; height: 300px; border-radius: 10%;">
+                <div id="food-details"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
     </section>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="dist/calendar-gc.min.js"></script>
+    <script>
+      // Function to get a cookie value
+      function getCookie(name) {
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          if (parts.length === 2) return parts.pop().split(';').shift();
+      }
 
+      // Fetch meal data based on cookie and selected date
+      async function fetchMealData(date) {
+          try {
+              const email = getCookie('user_email');
+              const response = await fetch('http://127.0.0.1:8000/api/meals', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                      email: email,
+                      date: date,
+                  }),
+              });
+
+              if (!response.ok) throw new Error('Network response was not ok.');
+              const data = await response.json();
+
+              // Update calendar and display data
+              updateCalendar(data);
+
+          } catch (error) {
+              console.error('There has been a problem with your fetch operation:', error);
+          }
+      }
+
+      // Update calendar with data
+      function updateCalendar(data) {
+          const events = data.map(day => ({
+              date: new Date(day.date),
+              eventName: day.items.map(item => `
+                  <div>
+                      <h5>${item.food_name}</h5>
+                      <p>Calories: ${item.calories}</p>
+                      <p>Carbs: ${item.carbs}</p>
+                      <p>Protein: ${item.protein}</p>
+                      <p>Fat: ${item.fat}</p>
+                  </div>
+              `).join(''),
+              dateColor: "#37385c"
+          }));
+
+          const calendar = $("#calendar").calendarGC({
+              dayBegin: 0,
+              events: events,
+              onclickDate: function (e, data) {
+                  showFoodDetails(data.date);
+              }
+          });
+          $("#calendar").show(); // Show calendar after data is loaded
+      }
+
+      // Show food details in modal
+      function showFoodDetails(date) {
+          const details = data.find(day => day.date === date)?.items.map(item => `
+              <div>
+                  <h5>${item.food_name}</h5>
+                  <p>Calories: ${item.calories}</p>
+                  <p>Carbs: ${item.carbs}</p>
+                  <p>Protein: ${item.protein}</p>
+                  <p>Fat: ${item.fat}</p>
+              </div>
+          `).join('') || 'No details available';
+
+          $('#food-details').html(details);
+      }
+
+      $(function () {
+          // Handle form submission
+          $('#date-form').on('submit', function (e) {
+              e.preventDefault(); // Prevent default form submission
+              const selectedDate = $('#date1').val(); // Get selected date from input
+              fetchMealData(selectedDate); // Fetch meal data based on selected date
+          });
+      });
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>
