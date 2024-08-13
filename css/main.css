@@ -599,9 +599,9 @@ nav.close ~ .dashboard .top{
 
   .formapi{
     display: flex;
-    margin-top: 3rem;
+    height: fit-content;
     justify-content: center;
     align-items: center;
+    margin-top: 3rem;
     padding: 2rem;
-    height: 40vh;
   }

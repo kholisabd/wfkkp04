@@ -109,22 +109,25 @@
 
       <!-- Form untuk Request -->
       <div class="m-3">
-        <h2>Recommend Food</h2>
+        <h3>Recommend Food</h3>
         <div class="formapi">
           <form action="" method="post">
-            <div class="mb-3 gap-3">
+            <div class="me-3">
               <label for="country" class="form-label">Country</label>
-              <input type="text" class="form-control" id="country" />
+              <select id="country" class="form-select" aria-label="Default select example">
+                <option selected value="KR">KR</option>
+                <option value="ID">ID</option>
+              </select>
             </div>
-            <div class="mb-3 gap-3">
+            <div class="me-3">
               <label for="mtime" class="form-label">Meal Time</label>
-              <input type="text" class="form-control" id="mtime" />
+              <select id="mtime" class="form-select" aria-label="Default select example">
+                <option selected value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+              </select>
             </div>
-            <div class="mb-3 gap-3">
-              <label for="usermail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="usermail" />
-            </div>
-            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            <button type="submit" class="btn btn-primary btn-sm"  style=" margin-top: 2rem; height: 2.2rem;">Submit</button>
           </form>
         </div>
       </div>
