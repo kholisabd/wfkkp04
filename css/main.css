@@ -603,4 +603,5 @@ nav.close ~ .dashboard .top{
     justify-content: center;
     align-items: center;
     padding: 2rem;
+    height: 40vh;
   }
