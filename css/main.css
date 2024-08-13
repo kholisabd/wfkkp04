@@ -596,3 +596,11 @@ nav.close ~ .dashboard .top{
     justify-content: flex-start;
     gap: 1rem;
   }
+
+  .formapi{
+    display: flex;
+    margin-top: 3rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
