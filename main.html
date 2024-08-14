@@ -281,103 +281,66 @@
         }
       }
 
-      // Transform API response into calendar data format
-      function transformData(data) {
-        const calendarData = [];
-        data.forEach((entry) => {
-          const date = entry.date;
-          entry.items.forEach((item) => {
+      // Transform API response into categorized calendar data format
+function transformData(data) {
+    const calendarData = [];
+
+    data.forEach((entry) => {
+        const date = entry.date;
+
+        entry.items.forEach((item) => {
+            let eventName = "";
+            let className = "";
+
+            // Determine the type of meal and set eventName and className accordingly
+            if (item.meal_time === "breakfast") {
+                eventName = `<span class='link-success' style='cursor: pointer;' data-bs-toggle='modal' data-bs-target='#exampleModal'>Breakfast</span>`;
+                className = "my-class";
+            } else if (item.meal_time === "lunch") {
+                eventName = `<span class='link-warning' style='cursor: pointer;' data-bs-toggle='modal' data-bs-target='#exampleModal'>Lunch</span>`;
+                className = "my-class";
+            } else if (item.meal_time === "dinner") {
+                eventName = `<span class='link-primary' style='cursor: pointer;' data-bs-toggle='modal' data-bs-target='#exampleModal'>Dinner</span>`;
+                className = "my-class";
+            }
+
+            // Push the meal event to calendarData
             calendarData.push({
-              date: date,
-              title: item.food_name, // Each food name separately
+                date: new Date(date),
+                eventName: eventName,
+                className: className,
+                dateColor: "#37385c",
             });
-          });
         });
-        return calendarData;
-      }
+    });
 
-      // Handle form submission
-      document
-        .getElementById("date-form")
-        .addEventListener("submit", async (event) => {
-          event.preventDefault();
-          const date = document.getElementById("month-year").value;
+    return calendarData;
+}
 
-          // Fetch data
-          const data = await fetchMealData(date);
-          console.log("data : ", data);
+// Handle form submission
+document.getElementById("date-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const date = document.getElementById("month-year").value;
 
-          // Transform and display data
-          const calendarData = transformData(data);
-          console.log("calendarData : ", calendarData);
+    // Fetch data
+    const data = await fetchMealData(date);
+    console.log("data : ", data);
 
-          // Initialize the calendar
-          $("#calendar").calendarGC({
-            dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            monthNames: [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December",
-            ],
-            data: calendarData,
-            grid: { line: "solid 1px", gap: 10 },
-            responsive: true,
-            onDayClick: null, // Disable click handler
-          });
+    // Transform and display data
+    const calendarData = transformData(data);
+    console.log("calendarData : ", calendarData);
 
-          // Function to render food items on specific dates
-          function renderDay() {
-            // Get all the day elements in the calendar
-            const dayElements = document.querySelectorAll(".day"); // 수정된 선택자
-
-            dayElements.forEach((dayElement) => {
-              const dayDateStr = dayElement.getAttribute("data-date");
-              const dayDate = new Date(dayDateStr);
-
-              console.log("Day element date:", dayDateStr);
-
-              // Manually call dayRender function
-              const formattedDate = dayDate.toISOString().split("T")[0];
-              const foodItems = calendarData.filter(
-                (item) => item.date === formattedDate
-              );
-
-              if (foodItems.length > 0) {
-                console.log(
-                  "Food items found for",
-                  formattedDate,
-                  ":",
-                  foodItems
-                );
-
-                // Clear any existing content before appending
-                dayElement.innerHTML = "";
-
-                // Iterate through all food items for the given date and append them
-                foodItems.forEach((foodItem) => {
-                  const titleElement = document.createElement("div");
-                  titleElement.className = "food-title";
-                  titleElement.textContent = foodItem.title; // Use title
-                  dayElement.appendChild(titleElement);
-                });
-              }
-            });
-          }
-
-          // Call renderDay function to update the calendar with food items
-          document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(renderDay, 100); // Adjust the timeout as needed
-          });
+    // Initialize the calendar with events
+    $(function (e) {
+        var calendar = $("#calendar").calendarGC({
+            events: calendarData,
+            onclickDate: function(e, data) {
+                console.log(e, data);
+            }
         });
+    });
+});
+
     </script>
   </body>
 </html>
