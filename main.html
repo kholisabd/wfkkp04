@@ -1,39 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Home</title> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
 
-    <!----======== CSS ======== -->
-    <link rel="stylesheet" href="css/main.css">
-    <!----===== Iconscout CSS ===== -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/calendar-gc.css" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="src/calendar-gc.css">
+    <!-- FullCalendar CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/main.min.css"
+      rel="stylesheet"
+    />
 
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- FullCalendar JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/main.min.js"></script>
 
-  <style>
-    html,
-    body {
-      margin: 0;
-      overflow-x: hidden;
-    }
-    ul {
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="dist/calendar-gc.min.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        overflow-x: hidden;
+      }
+      ul {
         list-style: none;
         margin-left: -2rem;
-    }
-    ul a{
+      }
+      ul a {
         text-decoration: none;
-    }
-    .low-calorie {
+      }
+      .low-calorie {
         font-size: 0.6rem;
         color: white;
         background-color: rgb(29, 93, 255);
@@ -42,8 +54,8 @@
         top: -2rem;
         left: 2rem;
         position: relative;
-    }
-    .good-calorie {
+      }
+      .good-calorie {
         font-size: 0.6rem;
         color: white;
         background-color: rgb(29, 115, 1);
@@ -52,8 +64,8 @@
         top: -2rem;
         left: 2rem;
         position: relative;
-    }
-    .over-calorie {
+      }
+      .over-calorie {
         font-size: 0.6rem;
         color: white;
         background-color: rgb(115, 1, 1);
@@ -62,196 +74,288 @@
         top: -2rem;
         left: 2rem;
         position: relative;
-    }
-    .breakfast {
+      }
+      .breakfast {
         font-size: 0.8rem;
         font-weight: 600;
         color: #075700;
         cursor: pointer;
         margin-top: -5rem;
-    }
-    .lunch {
+      }
+      .lunch {
         font-size: 0.8rem;
         font-weight: 600;
         color: #777503;
         cursor: pointer;
         margin-top: -5rem;
-    }
-    .dinner {
+      }
+      .dinner {
         font-size: 0.8rem;
         font-weight: 600;
         color: #0c065c;
         cursor: pointer;
         margin-top: -5rem;
-    }
-    #calendar {
-        display: none; /* Hide calendar initially */
-    }
-  </style>
-</head>
-<body>
+      }
+      #calendar {
+        padding: 1rem;
+      }
+      .food-title {
+        font-size: 0.8rem;
+        margin: 0;
+        padding: 2px;
+        background-color: #f0f0f0; /* 배경색 추가하여 확인 */
+        border-radius: 3px;
+        display: inline-block; /* inline-block으로 변경하여 렌더링 확인 */
+      }
+    </style>
+  </head>
+  <body>
     <nav>
-        <div class="logo-name">
-            <div class="logo-image">
-                <img src="img/logo.jpg" alt="">
-            </div>
-            <span class="logo_name">Foodnutri</span>
+      <div class="logo-name">
+        <div class="logo-image">
+          <img src="img/logo.jpg" alt="" />
         </div>
-        <div class="menu-items">
-            <ul class="nav-links">
-                <li><a href="main.html">
-                    <i class="uil uil-estate"></i>
-                    <span class="link-name">Home</span>
-                </a></li>
-                <li><a href="uppicture.html">
-                    <i class="uil uil-image-upload"></i>
-                    <span class="link-name">Upload Picture</span>
-                </a></li>
-                <li><a href="recomfood.html">
-                    <i class="uil uil-utensils-alt"></i>
-                    <span class="link-name">Similar Food Recommendation</span>
-                </a></li>
-                <li><a href="recomfooduser.html">
-                  <i class="uil uil-chat-bubble-user"></i>
-                  <span class="link-name">User Based Recommendation</span>
-              </a></li>
-            </ul>
-        </div>
+        <span class="logo_name">Foodnutri</span>
+      </div>
+      <div class="menu-items">
+        <ul class="nav-links">
+          <li>
+            <a href="main.html"
+              ><i class="uil uil-estate"></i
+              ><span class="link-name">Home</span></a
+            >
+          </li>
+          <li>
+            <a href="uppicture.html"
+              ><i class="uil uil-image-upload"></i
+              ><span class="link-name">Upload Picture</span></a
+            >
+          </li>
+          <li>
+            <a href="recomfood.html"
+              ><i class="uil uil-utensils-alt"></i
+              ><span class="link-name">Similar Food Recommendation</span></a
+            >
+          </li>
+          <li>
+            <a href="recomfooduser.html"
+              ><i class="uil uil-chat-bubble-user"></i
+              ><span class="link-name">User Based Recommendation</span></a
+            >
+          </li>
+        </ul>
+      </div>
     </nav>
 
     <section class="dashboard">
-        <div class="top">
-            <i class="uil uil-bars sidebar-toggle"></i>
-            <div class="search-box"></div>
-            <div class="dropdown">
-              <a href="#" class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="img/profile.jpg" alt=""></a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="updateprof1.html"><i class="uil uil-user"></i> Update Profile</a></li>
-                <li><a class="dropdown-item" href="login.html"><i class="uil uil-sign-out-alt"></i> Logout</a></li>
-              </ul>
-            </div>
+      <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+        <div class="search-box"></div>
+        <div class="dropdown">
+          <a
+            href="#"
+            class="dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img src="img/profile.jpg" alt="" />
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="updateprof1.html"
+                ><i class="uil uil-user"></i> Update Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="login.html"
+                ><i class="uil uil-sign-out-alt"></i> Logout</a
+              >
+            </li>
+          </ul>
         </div>
+      </div>
 
-        <!-- Form to choose date -->
-        <form class="m-5" id="date-form" action="" method="post">
-            <div class="me-3 mt-4">
-                <label for="date1" class="form-label">Choose Date</label>
-                <input type="date" class="form-control" id="date1" name="date1" required />
+      <!-- Form to choose date -->
+      <form class="m-5" id="date-form" action="" method="get">
+        <div class="me-3 mt-4">
+          <label for="month-year" class="form-label">월과 연도 선택</label>
+          <input
+            type="text"
+            class="form-control"
+            id="month-year"
+            name="month-year"
+            placeholder="YYYY-MM"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary btn-sm"
+          style="margin-top: 3.55rem; height: 2.2rem"
+        >
+          Submit
+        </button>
+      </form>
+
+      <!-- Calendar container -->
+      <div id="calendar"></div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Food Detail
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
-            <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 3.55rem; height: 2.2rem;">Submit</button>
-        </form>
-
-        <!-- Calendar container -->
-        <div id="calendar" style="padding: 1rem;"></div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Food Detail</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <img src="img/img1.jpg" class="m-3" alt="profile" style="width: 430px; height: 300px; border-radius: 10%;">
-                <div id="food-details"></div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              </div>
+            <div class="modal-body">
+              <img
+                src="img/img1.jpg"
+                class="m-3"
+                alt="profile"
+                style="width: 430px; height: 300px; border-radius: 10%"
+              />
+              <div id="food-details"></div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>
-
+      </div>
     </section>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
     <script src="dist/calendar-gc.min.js"></script>
     <script>
       // Function to get a cookie value
       function getCookie(name) {
-          const value = `; ${document.cookie}`;
-          const parts = value.split(`; ${name}=`);
-          if (parts.length === 2) return parts.pop().split(';').shift();
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
       }
 
       // Fetch meal data based on cookie and selected date
       async function fetchMealData(date) {
-          try {
-              const email = getCookie('user_email');
-              const response = await fetch('http://127.0.0.1:8000/api/meals', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                      email: email,
-                      date: date,
-                  }),
-              });
-
-              if (!response.ok) throw new Error('Network response was not ok.');
-              const data = await response.json();
-
-              // Update calendar and display data
-              updateCalendar(data);
-
-          } catch (error) {
-              console.error('There has been a problem with your fetch operation:', error);
-          }
+        try {
+          // const email = getCookie("user_email");
+          const email = "test2@gmail.com";
+          const response = await fetch("http://127.0.0.1:8000/api/meals", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              date: date,
+              email: email,
+            }),
+          });
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.error("Error fetching meal data:", error);
+          return [];
+        }
+      }
+      // Transform API response into calendar data format
+      function transformData(data) {
+        const calendarData = [];
+        data.forEach((entry) => {
+          const date = entry.date;
+          entry.items.forEach((item) => {
+            calendarData.push({
+              date: date,
+              title: item.food_name, // Each food name separately
+            });
+          });
+        });
+        return calendarData;
       }
 
-      // Update calendar with data
-      function updateCalendar(data) {
-          const events = data.map(day => ({
-              date: new Date(day.date),
-              eventName: day.items.map(item => `
-                  <div>
-                      <h5>${item.food_name}</h5>
-                      <p>Calories: ${item.calories}</p>
-                      <p>Carbs: ${item.carbs}</p>
-                      <p>Protein: ${item.protein}</p>
-                      <p>Fat: ${item.fat}</p>
-                  </div>
-              `).join(''),
-              dateColor: "#37385c"
-          }));
+      // Handle form submission
+      document
+        .getElementById("date-form")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const date = document.getElementById("month-year").value;
 
-          const calendar = $("#calendar").calendarGC({
-              dayBegin: 0,
-              events: events,
-              onclickDate: function (e, data) {
-                  showFoodDetails(data.date);
+          // Fetch data
+          const data = await fetchMealData(date);
+          console.log("data : ", data);
+
+          // Transform and display data
+          const calendarData = transformData(data);
+          console.log("calendarData : ", calendarData);
+
+          $("#calendar").calendarGC({
+            dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            monthNames: [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ],
+            data: calendarData,
+            grid: { line: "solid 1px", gap: 10 },
+            responsive: true,
+            onDayClick: null, // Disable click handler
+            dayRender: function (date, dayElement) {
+              console.log("dayRender called for date:", date.toISOString());
+
+              // Convert date to 'YYYY-MM-DD' format
+              const formattedDate = date.toISOString().split("T")[0];
+              const foodItems = calendarData.filter(
+                (item) => item.date === formattedDate
+              );
+
+              if (foodItems.length > 0) {
+                console.log("Food items found:", foodItems);
+
+                // Clear any existing content before appending
+                dayElement.innerHTML = "";
+
+                // Iterate through all food items for the given date and append them
+                foodItems.forEach((foodItem) => {
+                  const titleElement = document.createElement("div");
+                  titleElement.className = "food-title";
+                  titleElement.textContent = foodItem.title;
+                  dayElement.appendChild(titleElement);
+                });
               }
+            },
           });
-          $("#calendar").show(); // Show calendar after data is loaded
-      }
-
-      // Show food details in modal
-      function showFoodDetails(date) {
-          const details = data.find(day => day.date === date)?.items.map(item => `
-              <div>
-                  <h5>${item.food_name}</h5>
-                  <p>Calories: ${item.calories}</p>
-                  <p>Carbs: ${item.carbs}</p>
-                  <p>Protein: ${item.protein}</p>
-                  <p>Fat: ${item.fat}</p>
-              </div>
-          `).join('') || 'No details available';
-
-          $('#food-details').html(details);
-      }
-
-      $(function () {
-          // Handle form submission
-          $('#date-form').on('submit', function (e) {
-              e.preventDefault(); // Prevent default form submission
-              const selectedDate = $('#date1').val(); // Get selected date from input
-              fetchMealData(selectedDate); // Fetch meal data based on selected date
-          });
-      });
+        });
     </script>
-    <script src="js/main.js"></script>
-</body>
+  </body>
 </html>

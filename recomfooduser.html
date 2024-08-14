@@ -33,6 +33,19 @@
       ul a {
         text-decoration: none;
       }
+
+      /* 페이지 중앙에 카드 배치하기 위한 스타일 */
+      .recom-container {
+        display: flex;
+        justify-content: center; /* 수평 중앙 정렬 */
+        align-items: center; /* 수직 중앙 정렬 */
+        min-height: 60vh; /* 화면 중앙에 위치하도록 높이 설정 */
+      }
+
+      .recom .card {
+        max-width: 800px; /* 카드의 최대 너비 설정 */
+        width: 100%;
+      }
     </style>
   </head>
   <body>
@@ -103,8 +116,10 @@
         </div>
       </div>
 
-      <div class="recom">
-        <!-- Rekomendasi makanan akan dirender di sini -->
+      <div class="recom-container">
+        <div class="recom">
+          <!-- Rekomendasi makanan akan dirender di sini -->
+        </div>
       </div>
 
       <!-- Form untuk Request -->
@@ -114,20 +129,34 @@
           <form action="" method="post">
             <div class="me-3">
               <label for="country" class="form-label">Country</label>
-              <select id="country" class="form-select" aria-label="Default select example">
+              <select
+                id="country"
+                class="form-select"
+                aria-label="Default select example"
+              >
                 <option selected value="KR">KR</option>
                 <option value="ID">ID</option>
               </select>
             </div>
             <div class="me-3">
               <label for="mtime" class="form-label">Meal Time</label>
-              <select id="mtime" class="form-select" aria-label="Default select example">
+              <select
+                id="mtime"
+                class="form-select"
+                aria-label="Default select example"
+              >
                 <option selected value="breakfast">Breakfast</option>
                 <option value="lunch">Lunch</option>
                 <option value="dinner">Dinner</option>
               </select>
             </div>
-            <button type="submit" class="btn btn-primary btn-sm"  style=" margin-top: 2rem; height: 2.2rem;">Submit</button>
+            <button
+              type="submit"
+              class="btn btn-primary btn-sm"
+              style="margin-top: 2rem; height: 2.2rem"
+            >
+              Submit
+            </button>
           </form>
         </div>
       </div>
@@ -138,6 +167,13 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // getCookie 함수 정의
+        function getCookie(name) {
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          if (parts.length === 2) return parts.pop().split(";").shift();
+        }
+
         // Event listener untuk submit form
         const form = document.querySelector(".formapi form");
         form.addEventListener("submit", function (event) {
@@ -146,7 +182,9 @@
           // Mengambil nilai dari input pengguna
           const country = document.getElementById("country").value;
           const mealTime = document.getElementById("mtime").value;
-          const email = document.getElementById("usermail").value;
+
+          const email = getCookie("user_email"); // cookie email
+          console.log("cookie email:", email);
 
           // Data yang akan dikirim ke API
           const requestData = {
@@ -155,26 +193,22 @@
             email: email,
           };
 
-          // Mengirim request ke API
+          // API request
+          console.log("API request:", requestData);
+
+          // Mengirim request ke API dalam format JSON
           fetch("http://127.0.0.1:8000/api/diet-recommendation", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
+            credentials: "include",
             body: JSON.stringify(requestData),
           })
             .then((response) => response.json())
             .then((data) => {
-              // Menggunakan data yang diterima dari API
-              console.log(data); // 데이터 구조를 콘솔에서 확인
-
-              // Verifikasi apakah 데이터 및 필요한 속성이 존재하는지 확인
-              if (data && data.data) {
-                displayRecommendedFoods(data);
-              } else {
-                document.querySelector(".recom").innerHTML =
-                  "<p>No recommendation data available.</p>";
-              }
+              console.log("API resnpose:", data);
+              displayRecommendedFoods(data);
             })
             .catch((error) => {
               console.error("Error:", error);
@@ -184,35 +218,56 @@
         // Fungsi untuk menampilkan makanan yang direkomendasikan di halaman
         function displayRecommendedFoods(data) {
           const recomContainer = document.querySelector(".recom");
-          recomContainer.innerHTML = ""; // Clear previous recommendations
+          recomContainer.innerHTML = "";
 
-          // Accessing the data from the response
-          const food = data.data;
+          const food = data;
 
-          const foodCard = document.createElement("div");
-          foodCard.className = "card mb-3 ms-2 mt-2";
-          foodCard.style.width = "18rem";
+          console.log("추천 음식 데이터:", food);
 
-          const cardBody = document.createElement("div");
-          cardBody.className = "card-body";
+          if (food) {
+            const foodCard = document.createElement("div");
+            foodCard.className = "card mb-3 ms-2 mt-2";
+            foodCard.style.width = "80%"; // 카드가 가로로 웹 페이지 전체를 차지하게 설정
+            foodCard.style.height = "auto";
 
-          const cardTitle = document.createElement("h5");
-          cardTitle.className = "card-title";
-          cardTitle.textContent = food.food_name;
+            const cardBody = document.createElement("div");
+            cardBody.className = "card-body";
 
-          const cardText = document.createElement("p");
-          cardText.className = "card-text";
-          cardText.textContent = food.food_description;
+            const cardTitle = document.createElement("h5");
+            cardTitle.className = "card-title";
+            cardTitle.textContent = food.food_name;
+            cardTitle.style.fontSize = "1.5rem"; // 제목의 글자 크기 설정
 
-          const cardReason = document.createElement("p");
-          cardReason.className = "card-text";
-          cardReason.textContent = food.reason;
+            const cardText = document.createElement("p");
+            cardText.className = "card-text";
+            cardText.textContent = food.food_description;
+            cardText.style.fontSize = "1.2rem"; // 본문의 글자 크기 설정
 
-          cardBody.appendChild(cardTitle);
-          cardBody.appendChild(cardText);
-          cardBody.appendChild(cardReason);
-          foodCard.appendChild(cardBody);
-          recomContainer.appendChild(foodCard);
+            const cardReason = document.createElement("p");
+            cardReason.className = "card-text";
+            cardReason.textContent = food.reason;
+            cardReason.style.fontSize = "1.1rem"; // 이유의 글자 크기 설정
+
+            // 이미지가 있을 경우 추가
+            if (food.image_url) {
+              const img = document.createElement("img");
+              img.src = food.image_url;
+              img.alt = food.food_name;
+              img.className = "card-img-top";
+              img.style.width = "100%";
+              img.style.height = "auto"; // 이미지 높이를 자동으로 조정
+              foodCard.appendChild(img);
+            }
+
+            cardBody.appendChild(cardTitle);
+            cardBody.appendChild(cardText);
+            cardBody.appendChild(cardReason);
+            foodCard.appendChild(cardBody);
+            recomContainer.appendChild(foodCard);
+          } else {
+            recomContainer.innerHTML =
+              "<p>No recommendation data available.</p>";
+          }
         }
       });
     </script>

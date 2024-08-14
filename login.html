@@ -1,47 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="stylesheet" href="css/login.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
     <div class="container" id="container">
+      <div class="form-container sign-in">
+        <form id="login-form">
+          <h1>Login</h1>
+          <div class="social-icons"></div>
+          <input type="email" id="email" placeholder="Email" required />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <span style="margin-top: 1rem; margin-bottom: 1rem"
+            >Forgot Your
+            <a href="forgotpw.html" style="color: #2873bd">Password</a> or
+            <a href="findid.html" style="color: #2873bd">Id?</a></span
+          >
+          <button type="submit" class="but">Login</button>
+          <span style="text-align: center; margin-top: 1rem"
+            >Don't Have an Account? <br />
+            <a href="register1.html" style="color: #2873bd"
+              >Create an Account</a
+            >
+          </span>
+        </form>
+      </div>
 
-        <div class="form-container sign-in">
-            <form>
-                <h1>Login</h1>
-                <div class="social-icons">
-                </div>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <span style="margin-top: 1rem; margin-bottom: 1rem;">Forgot Your <a href="forgotpw.html" style="color: #2873bd;">Password</a> or <a href="findid.html" style="color: #2873bd;">Id?</a></span>
-                <!-- <button>Login</button> -->
-                <a class="but" href="main.html">Login</a>
-                <span style="text-align: center; margin-top: 1rem;">Don't Have an Account? <br>
-                <a href="register1.html" style="color: #2873bd;" >Create an Account</a>
-                </span>
-                
-            </form>
+      <div class="toggle-container">
+        <div class="toggle">
+          <div class="toggle-panel toggle-right">
+            <img src="img/pic3.png" alt="" />
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-right">
-                    <img src="img/pic3.png"  alt="">
-                
-                </div>
-            </div>
-        </div>
+    <script>
+      document
+        .querySelector("form")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
 
+          const email = document.querySelector('input[type="email"]').value;
+          const password = document.querySelector(
+            'input[type="password"]'
+          ).value;
 
+          try {
+            const response = await fetch("http://127.0.0.1:8000/api_login/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              credentials: "include", // 쿠키를 포함시키기 위해 추가
+              body: JSON.stringify({
+                email: email,
+                password: password,
+              }),
+            });
 
+            function getCookie(name) {
+              const value = `; ${document.cookie}`;
+              const parts = value.split(`; ${name}=`);
+              if (parts.length === 2) return parts.pop().split(";").shift();
+            }
 
-        </div>
+            const data = await response.json();
+            console.log("Response:", data);
 
-    
-</body>
+            if (response.ok) {
+              // 쿠키가 브라우저에 저장되었는지 확인
+              const userEmail = getCookie("user_email");
+              console.log("User Email Cookie:", userEmail);
+              console.log("All Cookies:", document.cookie);
+              // 로그인 성공 후 페이지 이동
+              window.location.href = "main.html";
+            } else {
+              // 로그인 실패
+              console.error("Error:", data.message);
+            }
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        });
+    </script>
+  </body>
 </html>
