@@ -124,6 +124,7 @@
                 required
               />
             </div>
+
             <div class="me-3">
               <label for="mtime" class="form-label">Meal Time</label>
               <select
@@ -147,8 +148,37 @@
         </div>
       </div>
 
+
+      <div class="asik">
+        <img id="imagePreview" src="" alt="Preview Gambar" style="max-width: 300px; max-height: 300px; display: none;">
+      </div>
+
+
       <div id="result" class="mt-4"></div>
     </section>
+
+
+
+    <script>
+      const imageInput = document.getElementById('image');
+      const imagePreview = document.getElementById('imagePreview');
+
+      imageInput.addEventListener('change', function() {
+          const file = this.files[0];
+          if (file) {
+              const reader = new FileReader();
+
+              reader.onload = function(e) {
+                  imagePreview.src = e.target.result;
+                  imagePreview.style.display = 'block';
+              }
+
+              reader.readAsDataURL(file);
+          }
+      });
+  </script>
+
+
 
     <script>
       // Function to get email from cookies

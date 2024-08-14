@@ -605,3 +605,10 @@ nav.close ~ .dashboard .top{
     margin-top: 3rem;
     padding: 2rem;
   }
+
+  .asik{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
