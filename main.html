@@ -280,82 +280,82 @@
           return [];
         }
       }
-      // Transform API response into calendar data format
-      function transformData(data) {
-        const calendarData = [];
-        data.forEach((entry) => {
-          const date = entry.date;
-          entry.items.forEach((item) => {
-            calendarData.push({
-              date: date,
-              title: item.food_name, // Each food name separately
-            });
-          });
-        });
-        return calendarData;
+
+    // Transform API response into calendar data format
+function transformData(data) {
+  const calendarData = [];
+  data.forEach((entry) => {
+    const date = entry.date;
+    entry.items.forEach((item) => {
+      calendarData.push({
+        date: new Date(date), // Convert string date to Date object
+        eventName: item.food_name, // Set the food name as eventName
+        className: "badge bg-info", // You can customize this class
+        onclick(e, data) {
+          console.log("Clicked on:", data.eventName); // Handle click event
+        },
+        dateColor: "blue" // Set date text color
+      });
+    });
+  });
+  return calendarData;
+}
+
+
+   document.getElementById("date-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const date = document.getElementById("month-year").value;
+
+  // Fetch data
+  const data = await fetchMealData(date);
+  console.log("data : ", data);
+
+  // Transform and display data
+  const calendarData = transformData(data);
+  console.log("calendarData : ", calendarData);
+
+  $("#calendar").calendarGC({
+    dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    monthNames: [
+      "January", "February", "March", "April", "May", "June", 
+      "July", "August", "September", "October", "November", "December"
+    ],
+    data: calendarData,
+    grid: { line: "solid 1px", gap: 10 },
+    responsive: true,
+    onDayClick: null, // Disable click handler
+    dayRender: function (date, dayElement) {
+      console.log("dayRender called for date:", date.toISOString());
+
+      // Get the corresponding event for the date
+      const event = calendarData.find(event => 
+        event.date.toISOString().split("T")[0] === date.toISOString().split("T")[0]
+      );
+
+      if (event) {
+        console.log("Event found:", event);
+
+        // Clear any existing content before appending
+        dayElement.innerHTML = "";
+
+        // Create an element for the event
+        const eventElement = document.createElement("span");
+        eventElement.className = event.className;
+        eventElement.textContent = event.eventName;
+        eventElement.style.color = event.dateColor;
+
+        // Attach onclick event
+        eventElement.onclick = function(e) {
+          event.onclick(e, event);
+        };
+
+        // Append the event element to the day element
+        dayElement.appendChild(eventElement);
       }
+    },
+  });
+});
 
-      // Handle form submission
-      document
-        .getElementById("date-form")
-        .addEventListener("submit", async (event) => {
-          event.preventDefault();
-          const date = document.getElementById("month-year").value;
-
-          // Fetch data
-          const data = await fetchMealData(date);
-          console.log("data : ", data);
-
-          // Transform and display data
-          const calendarData = transformData(data);
-          console.log("calendarData : ", calendarData);
-
-          $("#calendar").calendarGC({
-            dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            monthNames: [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December",
-            ],
-            data: calendarData,
-            grid: { line: "solid 1px", gap: 10 },
-            responsive: true,
-            onDayClick: null, // Disable click handler
-            dayRender: function (date, dayElement) {
-              console.log("dayRender called for date:", date.toISOString());
-
-              // Convert date to 'YYYY-MM-DD' format
-              const formattedDate = date.toISOString().split("T")[0];
-              const foodItems = calendarData.filter(
-                (item) => item.date === formattedDate
-              );
-
-              if (foodItems.length > 0) {
-                console.log("Food items found:", foodItems);
-
-                // Clear any existing content before appending
-                dayElement.innerHTML = "";
-
-                // Iterate through all food items for the given date and append them
-                foodItems.forEach((foodItem) => {
-                  const titleElement = document.createElement("div");
-                  titleElement.className = "food-title";
-                  titleElement.textContent = foodItem.title;
-                  dayElement.appendChild(titleElement);
-                });
-              }
-            },
-          });
-        });
     </script>
   </body>
 </html>
