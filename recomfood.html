@@ -57,9 +57,6 @@
         max-width: 800px; /* 카드의 최대 너비 설정 */
         width: 100%;
       }
-
-
-
     </style>
   </head>
   <body>
@@ -165,14 +162,9 @@
         </form>
       </div>
 
-
       <div class="recom-container">
-      <div class="recom mt-3" id="recommendationResult">
-
+        <div class="recom mt-3" id="recommendationResult"></div>
       </div>
-
-      </div>
-
     </section>
 
     <script>
@@ -202,8 +194,8 @@
 
             const resultDiv = document.getElementById("recommendationResult");
             resultDiv.innerHTML = `
-                    <div class="card mb-3 ms-2 mt-2" style="width: 18rem;">
-                        <img src="${result.image_url}" class="card-img-top" style=" max-width: 800px; width: 100%;" alt="Similar Food">
+                    <div class="card mb-3 ms-2 mt-2">
+                        <img src="${result.image_url}" class="card-img-top" alt="Similar Food">
                         <div class="card-body">
                             <p class="card-text">${result.reason}</p>
                         </div>
